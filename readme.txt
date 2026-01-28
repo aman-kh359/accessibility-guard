@@ -1,5 +1,5 @@
 === Accessibility Guard ===
-Contributors: digiminati
+Contributors: aman359
 Tags: accessibility, wcag, a11y, compliance, scanner
 Requires at least: 6.0
 Tested up to: 6.8
