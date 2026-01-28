@@ -44,8 +44,8 @@ class WPAG_Statement {
     public function add_submenu() {
         add_submenu_page(
             'wpag-dashboard',
-            __( 'Accessibility Statement', 'wp-accessibility-guard' ),
-            __( 'Statement', 'wp-accessibility-guard' ),
+            __( 'Accessibility Statement', 'accessibility-guard' ),
+            __( 'Statement', 'accessibility-guard' ),
             'manage_options',
             'wpag-statement',
             array( $this, 'render_page' )
@@ -62,15 +62,15 @@ class WPAG_Statement {
 
         ?>
         <div class="wrap wpag-wrap">
-            <h1><?php esc_html_e( 'Accessibility Statement Generator', 'wp-accessibility-guard' ); ?></h1>
+            <h1><?php esc_html_e( 'Accessibility Statement Generator', 'accessibility-guard' ); ?></h1>
 
             <?php if ( $page ) : ?>
                 <div class="notice notice-success">
                     <p>
-                        <?php esc_html_e( 'Statement page exists:', 'wp-accessibility-guard' ); ?>
+                        <?php esc_html_e( 'Statement page exists:', 'accessibility-guard' ); ?>
                         <a href="<?php echo esc_url( get_permalink( $page_id ) ); ?>" target="_blank"><?php echo esc_html( $page->post_title ); ?></a>
                         &mdash;
-                        <a href="<?php echo esc_url( get_edit_post_link( $page_id ) ); ?>"><?php esc_html_e( 'Edit', 'wp-accessibility-guard' ); ?></a>
+                        <a href="<?php echo esc_url( get_edit_post_link( $page_id ) ); ?>"><?php esc_html_e( 'Edit', 'accessibility-guard' ); ?></a>
                     </p>
                 </div>
             <?php endif; ?>
@@ -80,19 +80,19 @@ class WPAG_Statement {
 
                 <table class="form-table">
                     <tr>
-                        <th scope="row"><label for="wpag_org_name"><?php esc_html_e( 'Organization Name', 'wp-accessibility-guard' ); ?></label></th>
+                        <th scope="row"><label for="wpag_org_name"><?php esc_html_e( 'Organization Name', 'accessibility-guard' ); ?></label></th>
                         <td><input type="text" id="wpag_org_name" name="org_name" value="<?php echo esc_attr( $settings['statement_org_name'] ?? '' ); ?>" class="regular-text"></td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="wpag_website_url"><?php esc_html_e( 'Website URL', 'wp-accessibility-guard' ); ?></label></th>
+                        <th scope="row"><label for="wpag_website_url"><?php esc_html_e( 'Website URL', 'accessibility-guard' ); ?></label></th>
                         <td><input type="url" id="wpag_website_url" name="website_url" value="<?php echo esc_url( home_url() ); ?>" class="regular-text" readonly></td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="wpag_email"><?php esc_html_e( 'Contact Email', 'wp-accessibility-guard' ); ?></label></th>
+                        <th scope="row"><label for="wpag_email"><?php esc_html_e( 'Contact Email', 'accessibility-guard' ); ?></label></th>
                         <td><input type="email" id="wpag_email" name="email" value="<?php echo esc_attr( $settings['statement_email'] ?? '' ); ?>" class="regular-text"></td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="wpag_conformance"><?php esc_html_e( 'Conformance Target', 'wp-accessibility-guard' ); ?></label></th>
+                        <th scope="row"><label for="wpag_conformance"><?php esc_html_e( 'Conformance Target', 'accessibility-guard' ); ?></label></th>
                         <td>
                             <select id="wpag_conformance" name="conformance">
                                 <option value="A" <?php selected( $settings['statement_conformance'] ?? 'AA', 'A' ); ?>>WCAG 2.2 Level A</option>
@@ -102,24 +102,24 @@ class WPAG_Statement {
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label for="wpag_limitations"><?php esc_html_e( 'Known Limitations', 'wp-accessibility-guard' ); ?></label></th>
+                        <th scope="row"><label for="wpag_limitations"><?php esc_html_e( 'Known Limitations', 'accessibility-guard' ); ?></label></th>
                         <td>
                             <textarea id="wpag_limitations" name="limitations" rows="5" class="large-text"><?php echo esc_textarea( $settings['statement_limitations'] ?? '' ); ?></textarea>
-                            <p class="description"><?php esc_html_e( 'Describe any known accessibility limitations (one per line).', 'wp-accessibility-guard' ); ?></p>
+                            <p class="description"><?php esc_html_e( 'Describe any known accessibility limitations (one per line).', 'accessibility-guard' ); ?></p>
                         </td>
                     </tr>
                 </table>
 
                 <p class="submit">
                     <button type="button" class="button button-primary" id="wpag-generate-statement">
-                        <?php echo $page ? esc_html__( 'Update Statement Page', 'wp-accessibility-guard' ) : esc_html__( 'Generate Statement Page', 'wp-accessibility-guard' ); ?>
+                        <?php echo $page ? esc_html__( 'Update Statement Page', 'accessibility-guard' ) : esc_html__( 'Generate Statement Page', 'accessibility-guard' ); ?>
                     </button>
                     <span class="spinner" id="wpag-statement-spinner"></span>
                 </p>
             </form>
 
             <!-- Preview -->
-            <h2><?php esc_html_e( 'Preview', 'wp-accessibility-guard' ); ?></h2>
+            <h2><?php esc_html_e( 'Preview', 'accessibility-guard' ); ?></h2>
             <div class="wpag-statement-preview" id="wpag-statement-preview">
                 <?php echo wp_kses_post( $this->generate_statement_html( $settings ) ); ?>
             </div>
@@ -136,7 +136,7 @@ class WPAG_Statement {
         check_ajax_referer( 'wpag_statement_nonce', 'wpag_statement_nonce_field' );
 
         if ( ! current_user_can( 'manage_options' ) ) {
-            wp_send_json_error( array( 'message' => __( 'Unauthorized.', 'wp-accessibility-guard' ) ) );
+            wp_send_json_error( array( 'message' => __( 'Unauthorized.', 'accessibility-guard' ) ) );
         }
 
         $settings = get_option( 'wpag_settings', wpag_default_settings() );
@@ -158,11 +158,11 @@ class WPAG_Statement {
                 'ID'           => $page_id,
                 'post_content' => $html,
             ) );
-            $message = __( 'Accessibility statement page updated.', 'wp-accessibility-guard' );
+            $message = __( 'Accessibility statement page updated.', 'accessibility-guard' );
         } else {
             // Create new page.
             $page_id = wp_insert_post( array(
-                'post_title'   => __( 'Accessibility Statement', 'wp-accessibility-guard' ),
+                'post_title'   => __( 'Accessibility Statement', 'accessibility-guard' ),
                 'post_content' => $html,
                 'post_status'  => 'publish',
                 'post_type'    => 'page',
@@ -174,7 +174,7 @@ class WPAG_Statement {
             }
 
             $settings['statement_page_id'] = $page_id;
-            $message = __( 'Accessibility statement page created.', 'wp-accessibility-guard' );
+            $message = __( 'Accessibility statement page created.', 'accessibility-guard' );
         }
 
         update_option( 'wpag_settings', $settings );
@@ -200,25 +200,25 @@ class WPAG_Statement {
         $site_url    = home_url();
         $date        = current_time( 'F j, Y' );
 
-        $html = '<h2>' . esc_html__( 'Accessibility Statement', 'wp-accessibility-guard' ) . '</h2>';
+        $html = '<h2>' . esc_html__( 'Accessibility Statement', 'accessibility-guard' ) . '</h2>';
 
         $html .= '<p>' . sprintf(
             /* translators: 1: organization name, 2: site URL */
-            esc_html__( '%1$s is committed to ensuring digital accessibility for people with disabilities. We are continually improving the user experience for everyone, and applying the relevant accessibility standards.', 'wp-accessibility-guard' ),
+            esc_html__( '%1$s is committed to ensuring digital accessibility for people with disabilities. We are continually improving the user experience for everyone, and applying the relevant accessibility standards.', 'accessibility-guard' ),
             '<strong>' . esc_html( $org_name ) . '</strong>'
         ) . '</p>';
 
-        $html .= '<h3>' . esc_html__( 'Conformance Status', 'wp-accessibility-guard' ) . '</h3>';
+        $html .= '<h3>' . esc_html__( 'Conformance Status', 'accessibility-guard' ) . '</h3>';
         $html .= '<p>' . sprintf(
             /* translators: 1: site URL, 2: WCAG level */
-            esc_html__( 'The Web Content Accessibility Guidelines (WCAG) defines requirements for designers and developers to improve accessibility for people with disabilities. It defines three levels of conformance: Level A, Level AA, and Level AAA. %1$s is partially conformant with WCAG 2.2 Level %2$s.', 'wp-accessibility-guard' ),
+            esc_html__( 'The Web Content Accessibility Guidelines (WCAG) defines requirements for designers and developers to improve accessibility for people with disabilities. It defines three levels of conformance: Level A, Level AA, and Level AAA. %1$s is partially conformant with WCAG 2.2 Level %2$s.', 'accessibility-guard' ),
             '<a href="' . esc_url( $site_url ) . '">' . esc_html( $org_name ) . '</a>',
             esc_html( $conformance )
         ) . '</p>';
 
         if ( $limitations ) {
-            $html .= '<h3>' . esc_html__( 'Known Limitations', 'wp-accessibility-guard' ) . '</h3>';
-            $html .= '<p>' . esc_html__( 'Despite our best efforts, some areas may not yet be fully accessible:', 'wp-accessibility-guard' ) . '</p>';
+            $html .= '<h3>' . esc_html__( 'Known Limitations', 'accessibility-guard' ) . '</h3>';
+            $html .= '<p>' . esc_html__( 'Despite our best efforts, some areas may not yet be fully accessible:', 'accessibility-guard' ) . '</p>';
             $html .= '<ul>';
             $lines = array_filter( array_map( 'trim', explode( "\n", $limitations ) ) );
             foreach ( $lines as $line ) {
@@ -227,19 +227,19 @@ class WPAG_Statement {
             $html .= '</ul>';
         }
 
-        $html .= '<h3>' . esc_html__( 'Feedback', 'wp-accessibility-guard' ) . '</h3>';
+        $html .= '<h3>' . esc_html__( 'Feedback', 'accessibility-guard' ) . '</h3>';
         $html .= '<p>' . sprintf(
             /* translators: %s: contact email */
-            esc_html__( 'We welcome your feedback on the accessibility of this website. If you encounter accessibility barriers, please contact us at %s.', 'wp-accessibility-guard' ),
+            esc_html__( 'We welcome your feedback on the accessibility of this website. If you encounter accessibility barriers, please contact us at %s.', 'accessibility-guard' ),
             '<a href="mailto:' . esc_attr( $email ) . '">' . esc_html( $email ) . '</a>'
         ) . '</p>';
 
-        $html .= '<h3>' . esc_html__( 'Assessment Approach', 'wp-accessibility-guard' ) . '</h3>';
-        $html .= '<p>' . esc_html__( 'This website is assessed using the Accessibility Guard plugin, which performs automated WCAG 2.2 scanning and provides remediation guidance.', 'wp-accessibility-guard' ) . '</p>';
+        $html .= '<h3>' . esc_html__( 'Assessment Approach', 'accessibility-guard' ) . '</h3>';
+        $html .= '<p>' . esc_html__( 'This website is assessed using the Accessibility Guard plugin, which performs automated WCAG 2.2 scanning and provides remediation guidance.', 'accessibility-guard' ) . '</p>';
 
         $html .= '<p><em>' . sprintf(
             /* translators: %s: date */
-            esc_html__( 'This statement was last updated on %s.', 'wp-accessibility-guard' ),
+            esc_html__( 'This statement was last updated on %s.', 'accessibility-guard' ),
             esc_html( $date )
         ) . '</em></p>';
 

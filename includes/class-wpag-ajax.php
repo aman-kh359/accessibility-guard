@@ -46,17 +46,17 @@ class WPAG_Ajax {
         check_ajax_referer( 'wpag_scan_nonce', 'nonce' );
 
         if ( ! current_user_can( 'manage_options' ) ) {
-            wp_send_json_error( array( 'message' => __( 'Unauthorized.', 'wp-accessibility-guard' ) ) );
+            wp_send_json_error( array( 'message' => __( 'Unauthorized.', 'accessibility-guard' ) ) );
         }
 
         $post_id = isset( $_POST['post_id'] ) ? absint( $_POST['post_id'] ) : 0;
         if ( ! $post_id ) {
-            wp_send_json_error( array( 'message' => __( 'Invalid post ID.', 'wp-accessibility-guard' ) ) );
+            wp_send_json_error( array( 'message' => __( 'Invalid post ID.', 'accessibility-guard' ) ) );
         }
 
         $url = get_permalink( $post_id );
         if ( ! $url ) {
-            wp_send_json_error( array( 'message' => __( 'Could not determine URL for this post.', 'wp-accessibility-guard' ) ) );
+            wp_send_json_error( array( 'message' => __( 'Could not determine URL for this post.', 'accessibility-guard' ) ) );
         }
 
         $html = WPAG_Scanner::fetch_page_html( $url );
@@ -87,7 +87,7 @@ class WPAG_Ajax {
         check_ajax_referer( 'wpag_scan_nonce', 'nonce' );
 
         if ( ! current_user_can( 'manage_options' ) ) {
-            wp_send_json_error( array( 'message' => __( 'Unauthorized.', 'wp-accessibility-guard' ) ) );
+            wp_send_json_error( array( 'message' => __( 'Unauthorized.', 'accessibility-guard' ) ) );
         }
 
         $offset     = isset( $_POST['offset'] ) ? absint( $_POST['offset'] ) : 0;
@@ -147,7 +147,7 @@ class WPAG_Ajax {
         check_ajax_referer( 'wpag_scan_nonce', 'nonce' );
 
         if ( ! current_user_can( 'manage_options' ) ) {
-            wp_send_json_error( array( 'message' => __( 'Unauthorized.', 'wp-accessibility-guard' ) ) );
+            wp_send_json_error( array( 'message' => __( 'Unauthorized.', 'accessibility-guard' ) ) );
         }
 
         global $wpdb;
@@ -165,6 +165,6 @@ class WPAG_Ajax {
             $wpdb->esc_like( '_wpag_' ) . '%'
         ) );
 
-        wp_send_json_success( array( 'message' => __( 'All results cleared.', 'wp-accessibility-guard' ) ) );
+        wp_send_json_success( array( 'message' => __( 'All results cleared.', 'accessibility-guard' ) ) );
     }
 }

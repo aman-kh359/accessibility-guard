@@ -68,7 +68,7 @@ class WPAG_Auto_Fixer {
         }
 
         echo '<a class="wpag-skip-link screen-reader-text" href="#content">'
-            . esc_html__( 'Skip to content', 'wp-accessibility-guard' )
+            . esc_html__( 'Skip to content', 'accessibility-guard' )
             . '</a>';
     }
 

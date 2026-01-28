@@ -109,7 +109,7 @@ class WPAG_Scanner {
                 'wpag_fetch_error',
                 sprintf(
                     /* translators: 1: HTTP status code, 2: URL */
-                    __( 'HTTP %1$d when fetching %2$s', 'wp-accessibility-guard' ),
+                    __( 'HTTP %1$d when fetching %2$s', 'accessibility-guard' ),
                     $code,
                     $url
                 )
@@ -118,12 +118,12 @@ class WPAG_Scanner {
 
         $body = wp_remote_retrieve_body( $response );
         if ( empty( $body ) ) {
-            return new WP_Error( 'wpag_empty_body', __( 'Empty response body.', 'wp-accessibility-guard' ) );
+            return new WP_Error( 'wpag_empty_body', __( 'Empty response body.', 'accessibility-guard' ) );
         }
 
         // Enforce 2 MB limit.
         if ( strlen( $body ) > 2 * 1024 * 1024 ) {
-            return new WP_Error( 'wpag_too_large', __( 'Page HTML exceeds 2 MB limit.', 'wp-accessibility-guard' ) );
+            return new WP_Error( 'wpag_too_large', __( 'Page HTML exceeds 2 MB limit.', 'accessibility-guard' ) );
         }
 
         return $body;
@@ -255,7 +255,7 @@ class WPAG_Scanner {
                 }
                 $this->add_issue(
                     'missing_alt_text',
-                    __( 'Image is missing the alt attribute.', 'wp-accessibility-guard' ),
+                    __( 'Image is missing the alt attribute.', 'accessibility-guard' ),
                     $this->get_outer_html( $img )
                 );
             }
@@ -272,7 +272,7 @@ class WPAG_Scanner {
             if ( $this->is_element_empty( $link ) && ! $this->has_accessible_name( $link ) ) {
                 $this->add_issue(
                     'empty_links_buttons',
-                    __( 'Link has no text content or accessible name.', 'wp-accessibility-guard' ),
+                    __( 'Link has no text content or accessible name.', 'accessibility-guard' ),
                     $this->get_outer_html( $link )
                 );
             }
@@ -284,7 +284,7 @@ class WPAG_Scanner {
             if ( $this->is_element_empty( $btn ) && ! $this->has_accessible_name( $btn ) ) {
                 $this->add_issue(
                     'empty_links_buttons',
-                    __( 'Button has no text content or accessible name.', 'wp-accessibility-guard' ),
+                    __( 'Button has no text content or accessible name.', 'accessibility-guard' ),
                     $this->get_outer_html( $btn )
                 );
             }
@@ -322,7 +322,7 @@ class WPAG_Scanner {
                     'color_contrast',
                     sprintf(
                         /* translators: %s: contrast ratio */
-                        __( 'Contrast ratio is %s:1 (minimum 4.5:1 required for normal text).', 'wp-accessibility-guard' ),
+                        __( 'Contrast ratio is %s:1 (minimum 4.5:1 required for normal text).', 'accessibility-guard' ),
                         round( $ratio, 2 )
                     ),
                     $this->get_outer_html( $el )
@@ -353,7 +353,7 @@ class WPAG_Scanner {
                     'heading_hierarchy',
                     sprintf(
                         /* translators: 1: previous heading tag, 2: current heading tag */
-                        __( 'Heading level skipped: H%1$d to H%2$d.', 'wp-accessibility-guard' ),
+                        __( 'Heading level skipped: H%1$d to H%2$d.', 'accessibility-guard' ),
                         $prev_level,
                         $level
                     ),
@@ -367,7 +367,7 @@ class WPAG_Scanner {
         if ( $headings->length > 0 && ! $has_h1 ) {
             $this->add_issue(
                 'heading_hierarchy',
-                __( 'Page has headings but is missing an H1 element.', 'wp-accessibility-guard' ),
+                __( 'Page has headings but is missing an H1 element.', 'accessibility-guard' ),
                 ''
             );
         }
@@ -413,7 +413,7 @@ class WPAG_Scanner {
 
             $this->add_issue(
                 'missing_form_labels',
-                __( 'Form field has no associated label or accessible name.', 'wp-accessibility-guard' ),
+                __( 'Form field has no associated label or accessible name.', 'accessibility-guard' ),
                 $this->get_outer_html( $field )
             );
         }
@@ -432,7 +432,7 @@ class WPAG_Scanner {
         if ( ! $el->hasAttribute( 'lang' ) && ! $el->hasAttribute( 'xml:lang' ) ) {
             $this->add_issue(
                 'missing_lang_attr',
-                __( 'The HTML element is missing a lang attribute.', 'wp-accessibility-guard' ),
+                __( 'The HTML element is missing a lang attribute.', 'accessibility-guard' ),
                 '<html>'
             );
         }
@@ -449,7 +449,7 @@ class WPAG_Scanner {
             if ( preg_match( '/:focus\s*\{[^}]*(outline\s*:\s*(none|0))/i', $css, $matches ) ) {
                 $this->add_issue(
                     'missing_focus_indicators',
-                    __( 'CSS rule removes focus outline. Keyboard users need visible focus indicators.', 'wp-accessibility-guard' ),
+                    __( 'CSS rule removes focus outline. Keyboard users need visible focus indicators.', 'accessibility-guard' ),
                     $matches[0]
                 );
             }
@@ -462,7 +462,7 @@ class WPAG_Scanner {
             if ( preg_match( '/outline\s*:\s*(none|0)\b/i', $style ) ) {
                 $this->add_issue(
                     'missing_focus_indicators',
-                    __( 'Inline style removes outline. This may hide focus indicators.', 'wp-accessibility-guard' ),
+                    __( 'Inline style removes outline. This may hide focus indicators.', 'accessibility-guard' ),
                     $this->get_outer_html( $el )
                 );
             }
@@ -495,7 +495,7 @@ class WPAG_Scanner {
                     'missing_landmarks',
                     sprintf(
                         /* translators: %s: landmark region name */
-                        __( 'Missing "%s" landmark region.', 'wp-accessibility-guard' ),
+                        __( 'Missing "%s" landmark region.', 'accessibility-guard' ),
                         $name
                     ),
                     ''
@@ -513,7 +513,7 @@ class WPAG_Scanner {
             if ( trim( $th->textContent ) === '' ) {
                 $this->add_issue(
                     'empty_table_headers',
-                    __( 'Table header cell is empty.', 'wp-accessibility-guard' ),
+                    __( 'Table header cell is empty.', 'accessibility-guard' ),
                     $this->get_outer_html( $th )
                 );
             }
@@ -563,7 +563,7 @@ class WPAG_Scanner {
         if ( ! $found ) {
             $this->add_issue(
                 'missing_skip_nav',
-                __( 'No skip navigation link found near the top of the page.', 'wp-accessibility-guard' ),
+                __( 'No skip navigation link found near the top of the page.', 'accessibility-guard' ),
                 ''
             );
         }
@@ -577,7 +577,7 @@ class WPAG_Scanner {
         if ( $title->length === 0 || trim( $title->item( 0 )->textContent ) === '' ) {
             $this->add_issue(
                 'missing_page_title',
-                __( 'Page is missing a title element or the title is empty.', 'wp-accessibility-guard' ),
+                __( 'Page is missing a title element or the title is empty.', 'accessibility-guard' ),
                 ''
             );
         }
@@ -600,7 +600,7 @@ class WPAG_Scanner {
                     'duplicate_ids',
                     sprintf(
                         /* translators: %s: the duplicate ID value */
-                        __( 'Duplicate ID found: "%s".', 'wp-accessibility-guard' ),
+                        __( 'Duplicate ID found: "%s".', 'accessibility-guard' ),
                         $id
                     ),
                     $this->get_outer_html( $el )
@@ -622,7 +622,7 @@ class WPAG_Scanner {
                         'empty_headings',
                         sprintf(
                             /* translators: %s: heading tag name */
-                            __( 'Empty %s element found.', 'wp-accessibility-guard' ),
+                            __( 'Empty %s element found.', 'accessibility-guard' ),
                             'H' . $i
                         ),
                         $this->get_outer_html( $heading )
@@ -641,7 +641,7 @@ class WPAG_Scanner {
             if ( ! $img->hasAttribute( 'width' ) || ! $img->hasAttribute( 'height' ) ) {
                 $this->add_issue(
                     'images_missing_dimensions',
-                    __( 'Image is missing explicit width and/or height attributes.', 'wp-accessibility-guard' ),
+                    __( 'Image is missing explicit width and/or height attributes.', 'accessibility-guard' ),
                     $this->get_outer_html( $img )
                 );
             }
@@ -680,7 +680,7 @@ class WPAG_Scanner {
 
             $this->add_issue(
                 'missing_link_text',
-                __( 'Link has no accessible text content.', 'wp-accessibility-guard' ),
+                __( 'Link has no accessible text content.', 'accessibility-guard' ),
                 $this->get_outer_html( $link )
             );
         }
@@ -698,7 +698,7 @@ class WPAG_Scanner {
                     'tabindex_positive',
                     sprintf(
                         /* translators: %d: tabindex value */
-                        __( 'Element has tabindex="%d". Positive tabindex disrupts natural tab order.', 'wp-accessibility-guard' ),
+                        __( 'Element has tabindex="%d". Positive tabindex disrupts natural tab order.', 'accessibility-guard' ),
                         $val
                     ),
                     $this->get_outer_html( $el )
@@ -717,7 +717,7 @@ class WPAG_Scanner {
                 'auto_playing_media',
                 sprintf(
                     /* translators: %s: element tag name */
-                    __( '<%s> has autoplay attribute. Users must control media playback.', 'wp-accessibility-guard' ),
+                    __( '<%s> has autoplay attribute. Users must control media playback.', 'accessibility-guard' ),
                     $el->nodeName
                 ),
                 $this->get_outer_html( $el )
@@ -729,7 +729,7 @@ class WPAG_Scanner {
         foreach ( $iframes as $iframe ) {
             $this->add_issue(
                 'auto_playing_media',
-                __( 'Iframe source includes autoplay parameter.', 'wp-accessibility-guard' ),
+                __( 'Iframe source includes autoplay parameter.', 'accessibility-guard' ),
                 $this->get_outer_html( $iframe )
             );
         }
@@ -744,7 +744,7 @@ class WPAG_Scanner {
         if ( $viewport->length === 0 ) {
             $this->add_issue(
                 'missing_viewport_meta',
-                __( 'Page is missing a viewport meta tag.', 'wp-accessibility-guard' ),
+                __( 'Page is missing a viewport meta tag.', 'accessibility-guard' ),
                 ''
             );
             return;
@@ -754,7 +754,7 @@ class WPAG_Scanner {
         if ( preg_match( '/user-scalable\s*=\s*no/i', $content ) ) {
             $this->add_issue(
                 'missing_viewport_meta',
-                __( 'Viewport meta disables user scaling (user-scalable=no).', 'wp-accessibility-guard' ),
+                __( 'Viewport meta disables user scaling (user-scalable=no).', 'accessibility-guard' ),
                 $this->get_outer_html( $viewport->item( 0 ) )
             );
         }
@@ -762,7 +762,7 @@ class WPAG_Scanner {
         if ( preg_match( '/maximum-scale\s*=\s*1(\.0)?(\s|;|,|$)/i', $content ) ) {
             $this->add_issue(
                 'missing_viewport_meta',
-                __( 'Viewport meta restricts scaling to maximum-scale=1.', 'wp-accessibility-guard' ),
+                __( 'Viewport meta restricts scaling to maximum-scale=1.', 'accessibility-guard' ),
                 $this->get_outer_html( $viewport->item( 0 ) )
             );
         }
@@ -788,7 +788,7 @@ class WPAG_Scanner {
                 if ( $text !== '' ) {
                     $this->add_issue(
                         'inline_styles_a11y',
-                        __( 'Element with text content is hidden via display:none without aria-hidden="true".', 'wp-accessibility-guard' ),
+                        __( 'Element with text content is hidden via display:none without aria-hidden="true".', 'accessibility-guard' ),
                         $this->get_outer_html( $el )
                     );
                 }
@@ -803,7 +803,7 @@ class WPAG_Scanner {
                         'inline_styles_a11y',
                         sprintf(
                             /* translators: %s: font-size value */
-                            __( 'Very small font size (%s) may be unreadable for users with low vision.', 'wp-accessibility-guard' ),
+                            __( 'Very small font size (%s) may be unreadable for users with low vision.', 'accessibility-guard' ),
                             $matches[0]
                         ),
                         $this->get_outer_html( $el )
@@ -825,7 +825,7 @@ class WPAG_Scanner {
             if ( $links->length > 1 && $lists->length === 0 ) {
                 $this->add_issue(
                     'missing_list_structure',
-                    __( 'Navigation contains multiple links but no list (ul/ol) structure.', 'wp-accessibility-guard' ),
+                    __( 'Navigation contains multiple links but no list (ul/ol) structure.', 'accessibility-guard' ),
                     '<nav>...' . $links->length . ' links...</nav>'
                 );
             }

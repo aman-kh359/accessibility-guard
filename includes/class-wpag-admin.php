@@ -48,8 +48,8 @@ class WPAG_Admin {
      */
     public function add_admin_menu() {
         add_menu_page(
-            __( 'Accessibility Guard', 'wp-accessibility-guard' ),
-            __( 'A11y Guard', 'wp-accessibility-guard' ),
+            __( 'Accessibility Guard', 'accessibility-guard' ),
+            __( 'A11y Guard', 'accessibility-guard' ),
             'manage_options',
             'wpag-dashboard',
             array( $this, 'render_dashboard_page' ),
@@ -59,8 +59,8 @@ class WPAG_Admin {
 
         add_submenu_page(
             'wpag-dashboard',
-            __( 'Dashboard', 'wp-accessibility-guard' ),
-            __( 'Dashboard', 'wp-accessibility-guard' ),
+            __( 'Dashboard', 'accessibility-guard' ),
+            __( 'Dashboard', 'accessibility-guard' ),
             'manage_options',
             'wpag-dashboard',
             array( $this, 'render_dashboard_page' )
@@ -68,8 +68,8 @@ class WPAG_Admin {
 
         add_submenu_page(
             'wpag-dashboard',
-            __( 'Settings', 'wp-accessibility-guard' ),
-            __( 'Settings', 'wp-accessibility-guard' ),
+            __( 'Settings', 'accessibility-guard' ),
+            __( 'Settings', 'accessibility-guard' ),
             'manage_options',
             'wpag-settings',
             array( $this, 'render_settings_page' )
@@ -93,18 +93,18 @@ class WPAG_Admin {
         // Auto-fix section.
         add_settings_section(
             'wpag_auto_fix_section',
-            __( 'Auto-Fix Options', 'wp-accessibility-guard' ),
+            __( 'Auto-Fix Options', 'accessibility-guard' ),
             function () {
-                echo '<p>' . esc_html__( 'Enable automatic fixes applied to the front-end output.', 'wp-accessibility-guard' ) . '</p>';
+                echo '<p>' . esc_html__( 'Enable automatic fixes applied to the front-end output.', 'accessibility-guard' ) . '</p>';
             },
             'wpag-settings'
         );
 
         $auto_fixes = array(
-            'auto_fix_skip_link'      => __( 'Inject skip navigation link', 'wp-accessibility-guard' ),
-            'auto_fix_lang_attr'      => __( 'Ensure HTML lang attribute', 'wp-accessibility-guard' ),
-            'auto_fix_empty_headings' => __( 'Remove empty headings', 'wp-accessibility-guard' ),
-            'auto_fix_form_labels'    => __( 'Add missing form labels', 'wp-accessibility-guard' ),
+            'auto_fix_skip_link'      => __( 'Inject skip navigation link', 'accessibility-guard' ),
+            'auto_fix_lang_attr'      => __( 'Ensure HTML lang attribute', 'accessibility-guard' ),
+            'auto_fix_empty_headings' => __( 'Remove empty headings', 'accessibility-guard' ),
+            'auto_fix_form_labels'    => __( 'Add missing form labels', 'accessibility-guard' ),
         );
 
         foreach ( $auto_fixes as $key => $label ) {
@@ -121,16 +121,16 @@ class WPAG_Admin {
         // Scan settings section.
         add_settings_section(
             'wpag_scan_section',
-            __( 'Scan Settings', 'wp-accessibility-guard' ),
+            __( 'Scan Settings', 'accessibility-guard' ),
             function () {
-                echo '<p>' . esc_html__( 'Configure which post types to include in scans.', 'wp-accessibility-guard' ) . '</p>';
+                echo '<p>' . esc_html__( 'Configure which post types to include in scans.', 'accessibility-guard' ) . '</p>';
             },
             'wpag-settings'
         );
 
         add_settings_field(
             'wpag_scan_post_types',
-            __( 'Post types to scan', 'wp-accessibility-guard' ),
+            __( 'Post types to scan', 'accessibility-guard' ),
             array( $this, 'render_post_types_field' ),
             'wpag-settings',
             'wpag_scan_section'
@@ -149,7 +149,7 @@ class WPAG_Admin {
         ?>
         <label>
             <input type="checkbox" name="wpag_settings[<?php echo esc_attr( $key ); ?>]" value="1" <?php checked( $checked ); ?>>
-            <?php esc_html_e( 'Enabled', 'wp-accessibility-guard' ); ?>
+            <?php esc_html_e( 'Enabled', 'accessibility-guard' ); ?>
         </label>
         <?php
     }
@@ -246,15 +246,15 @@ class WPAG_Admin {
             wp_localize_script( 'wpag-admin', 'wpag_data', array(
                 'ajax_url'           => admin_url( 'admin-ajax.php' ),
                 'nonce'              => wp_create_nonce( 'wpag_scan_nonce' ),
-                'scanning_text'      => __( 'Scanning...', 'wp-accessibility-guard' ),
-                'scan_text'          => __( 'Scan', 'wp-accessibility-guard' ),
-                'rescan_text'        => __( 'Re-scan', 'wp-accessibility-guard' ),
-                'complete_text'      => __( 'Scan Complete! Reloading...', 'wp-accessibility-guard' ),
-                'confirm_clear'      => __( 'Are you sure you want to clear all scan results?', 'wp-accessibility-guard' ),
-                'scan_failed'        => __( 'Scan failed.', 'wp-accessibility-guard' ),
-                'request_failed'     => __( 'Request failed. Please try again.', 'wp-accessibility-guard' ),
-                'clear_failed'       => __( 'Failed to clear results.', 'wp-accessibility-guard' ),
-                'error_generating'   => __( 'Error generating statement.', 'wp-accessibility-guard' ),
+                'scanning_text'      => __( 'Scanning...', 'accessibility-guard' ),
+                'scan_text'          => __( 'Scan', 'accessibility-guard' ),
+                'rescan_text'        => __( 'Re-scan', 'accessibility-guard' ),
+                'complete_text'      => __( 'Scan Complete! Reloading...', 'accessibility-guard' ),
+                'confirm_clear'      => __( 'Are you sure you want to clear all scan results?', 'accessibility-guard' ),
+                'scan_failed'        => __( 'Scan failed.', 'accessibility-guard' ),
+                'request_failed'     => __( 'Request failed. Please try again.', 'accessibility-guard' ),
+                'clear_failed'       => __( 'Failed to clear results.', 'accessibility-guard' ),
+                'error_generating'   => __( 'Error generating statement.', 'accessibility-guard' ),
             ) );
         }
     }
@@ -328,26 +328,26 @@ class WPAG_Admin {
 
         ?>
         <div class="wrap wpag-wrap">
-            <h1><?php esc_html_e( 'Accessibility Guard', 'wp-accessibility-guard' ); ?></h1>
+            <h1><?php esc_html_e( 'Accessibility Guard', 'accessibility-guard' ); ?></h1>
 
             <!-- Summary Cards -->
             <div class="wpag-summary-cards">
                 <div class="wpag-card wpag-card-errors">
                     <div class="wpag-card-number"><?php echo esc_html( $total_issues ); ?></div>
-                    <div class="wpag-card-label"><?php esc_html_e( 'Total Issues', 'wp-accessibility-guard' ); ?></div>
+                    <div class="wpag-card-label"><?php esc_html_e( 'Total Issues', 'accessibility-guard' ); ?></div>
                     <div class="wpag-card-breakdown">
-                        <span class="wpag-badge-error"><?php echo esc_html( $total_errors ); ?> <?php esc_html_e( 'errors', 'wp-accessibility-guard' ); ?></span>
-                        <span class="wpag-badge-warning"><?php echo esc_html( $total_warnings ); ?> <?php esc_html_e( 'warnings', 'wp-accessibility-guard' ); ?></span>
-                        <span class="wpag-badge-notice"><?php echo esc_html( $total_notices ); ?> <?php esc_html_e( 'notices', 'wp-accessibility-guard' ); ?></span>
+                        <span class="wpag-badge-error"><?php echo esc_html( $total_errors ); ?> <?php esc_html_e( 'errors', 'accessibility-guard' ); ?></span>
+                        <span class="wpag-badge-warning"><?php echo esc_html( $total_warnings ); ?> <?php esc_html_e( 'warnings', 'accessibility-guard' ); ?></span>
+                        <span class="wpag-badge-notice"><?php echo esc_html( $total_notices ); ?> <?php esc_html_e( 'notices', 'accessibility-guard' ); ?></span>
                     </div>
                 </div>
                 <div class="wpag-card">
                     <div class="wpag-card-number"><?php echo esc_html( count( $scanned_posts ) ); ?> / <?php echo esc_html( $total_pages ); ?></div>
-                    <div class="wpag-card-label"><?php esc_html_e( 'Pages Scanned', 'wp-accessibility-guard' ); ?></div>
+                    <div class="wpag-card-label"><?php esc_html_e( 'Pages Scanned', 'accessibility-guard' ); ?></div>
                 </div>
                 <div class="wpag-card">
                     <div class="wpag-card-number"><?php echo esc_html( $auto_fixes_count ); ?></div>
-                    <div class="wpag-card-label"><?php esc_html_e( 'Auto-Fixes Active', 'wp-accessibility-guard' ); ?></div>
+                    <div class="wpag-card-label"><?php esc_html_e( 'Auto-Fixes Active', 'accessibility-guard' ); ?></div>
                 </div>
                 <div class="wpag-card">
                     <div class="wpag-card-number">
@@ -365,7 +365,7 @@ class WPAG_Admin {
                         }
                         ?>
                     </div>
-                    <div class="wpag-card-label"><?php esc_html_e( 'Error-Free Pages', 'wp-accessibility-guard' ); ?></div>
+                    <div class="wpag-card-label"><?php esc_html_e( 'Error-Free Pages', 'accessibility-guard' ); ?></div>
                 </div>
             </div>
 
@@ -373,10 +373,10 @@ class WPAG_Admin {
             <div class="wpag-actions">
                 <button type="button" class="button button-primary wpag-scan-all">
                     <span class="dashicons dashicons-search" style="margin-top:3px;margin-right:4px;"></span>
-                    <?php esc_html_e( 'Scan All Pages', 'wp-accessibility-guard' ); ?>
+                    <?php esc_html_e( 'Scan All Pages', 'accessibility-guard' ); ?>
                 </button>
                 <button type="button" class="button wpag-clear-results">
-                    <?php esc_html_e( 'Clear All Results', 'wp-accessibility-guard' ); ?>
+                    <?php esc_html_e( 'Clear All Results', 'accessibility-guard' ); ?>
                 </button>
                 <div class="wpag-progress" style="display:none;">
                     <div class="wpag-progress-bar"><div class="wpag-progress-fill"></div></div>
@@ -389,13 +389,13 @@ class WPAG_Admin {
             <table class="widefat wpag-results-table">
                 <thead>
                     <tr>
-                        <th><?php esc_html_e( 'Page', 'wp-accessibility-guard' ); ?></th>
-                        <th><?php esc_html_e( 'Type', 'wp-accessibility-guard' ); ?></th>
-                        <th class="wpag-col-center"><?php esc_html_e( 'Errors', 'wp-accessibility-guard' ); ?></th>
-                        <th class="wpag-col-center"><?php esc_html_e( 'Warnings', 'wp-accessibility-guard' ); ?></th>
-                        <th class="wpag-col-center"><?php esc_html_e( 'Notices', 'wp-accessibility-guard' ); ?></th>
-                        <th><?php esc_html_e( 'Last Scanned', 'wp-accessibility-guard' ); ?></th>
-                        <th><?php esc_html_e( 'Actions', 'wp-accessibility-guard' ); ?></th>
+                        <th><?php esc_html_e( 'Page', 'accessibility-guard' ); ?></th>
+                        <th><?php esc_html_e( 'Type', 'accessibility-guard' ); ?></th>
+                        <th class="wpag-col-center"><?php esc_html_e( 'Errors', 'accessibility-guard' ); ?></th>
+                        <th class="wpag-col-center"><?php esc_html_e( 'Warnings', 'accessibility-guard' ); ?></th>
+                        <th class="wpag-col-center"><?php esc_html_e( 'Notices', 'accessibility-guard' ); ?></th>
+                        <th><?php esc_html_e( 'Last Scanned', 'accessibility-guard' ); ?></th>
+                        <th><?php esc_html_e( 'Actions', 'accessibility-guard' ); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -452,10 +452,10 @@ class WPAG_Admin {
                         <td><?php echo esc_html( $last ? human_time_diff( strtotime( $last ), time() ) . ' ago' : '—' ); ?></td>
                         <td>
                             <a href="<?php echo esc_url( admin_url( 'admin.php?page=wpag-dashboard&post_id=' . $post->ID ) ); ?>" class="button button-small">
-                                <?php esc_html_e( 'Details', 'wp-accessibility-guard' ); ?>
+                                <?php esc_html_e( 'Details', 'accessibility-guard' ); ?>
                             </a>
                             <button type="button" class="button button-small wpag-scan-page" data-post-id="<?php echo esc_attr( $post->ID ); ?>">
-                                <?php esc_html_e( 'Re-scan', 'wp-accessibility-guard' ); ?>
+                                <?php esc_html_e( 'Re-scan', 'accessibility-guard' ); ?>
                             </button>
                         </td>
                     </tr>
@@ -465,8 +465,8 @@ class WPAG_Admin {
             <?php else : ?>
             <div class="wpag-empty-state">
                 <span class="dashicons dashicons-universal-access-alt" style="font-size:48px;width:48px;height:48px;color:#ccc;"></span>
-                <h2><?php esc_html_e( 'No scan results yet', 'wp-accessibility-guard' ); ?></h2>
-                <p><?php esc_html_e( 'Click "Scan All Pages" to check your site for accessibility issues.', 'wp-accessibility-guard' ); ?></p>
+                <h2><?php esc_html_e( 'No scan results yet', 'accessibility-guard' ); ?></h2>
+                <p><?php esc_html_e( 'Click "Scan All Pages" to check your site for accessibility issues.', 'accessibility-guard' ); ?></p>
             </div>
             <?php endif; ?>
         </div>
@@ -481,7 +481,7 @@ class WPAG_Admin {
     private function render_detail_view( $post_id ) {
         $post = get_post( $post_id );
         if ( ! $post ) {
-            echo '<div class="wrap"><h1>' . esc_html__( 'Post not found.', 'wp-accessibility-guard' ) . '</h1></div>';
+            echo '<div class="wrap"><h1>' . esc_html__( 'Post not found.', 'accessibility-guard' ) . '</h1></div>';
             return;
         }
 
@@ -495,33 +495,33 @@ class WPAG_Admin {
         ?>
         <div class="wrap wpag-wrap">
             <h1>
-                <a href="<?php echo esc_url( admin_url( 'admin.php?page=wpag-dashboard' ) ); ?>" class="wpag-back">&larr; <?php esc_html_e( 'Dashboard', 'wp-accessibility-guard' ); ?></a>
+                <a href="<?php echo esc_url( admin_url( 'admin.php?page=wpag-dashboard' ) ); ?>" class="wpag-back">&larr; <?php esc_html_e( 'Dashboard', 'accessibility-guard' ); ?></a>
                 &nbsp;/&nbsp;
                 <?php echo esc_html( $post->post_title ); ?>
             </h1>
 
             <div class="wpag-detail-meta">
-                <span><strong><?php esc_html_e( 'URL:', 'wp-accessibility-guard' ); ?></strong> <a href="<?php echo esc_url( get_permalink( $post_id ) ); ?>" target="_blank"><?php echo esc_url( get_permalink( $post_id ) ); ?></a></span>
-                <span><strong><?php esc_html_e( 'Last scanned:', 'wp-accessibility-guard' ); ?></strong> <?php echo esc_html( $last_scan ? $last_scan : '—' ); ?></span>
+                <span><strong><?php esc_html_e( 'URL:', 'accessibility-guard' ); ?></strong> <a href="<?php echo esc_url( get_permalink( $post_id ) ); ?>" target="_blank"><?php echo esc_url( get_permalink( $post_id ) ); ?></a></span>
+                <span><strong><?php esc_html_e( 'Last scanned:', 'accessibility-guard' ); ?></strong> <?php echo esc_html( $last_scan ? $last_scan : '—' ); ?></span>
                 <button type="button" class="button button-primary wpag-scan-page" data-post-id="<?php echo esc_attr( $post_id ); ?>">
-                    <?php esc_html_e( 'Re-scan', 'wp-accessibility-guard' ); ?>
+                    <?php esc_html_e( 'Re-scan', 'accessibility-guard' ); ?>
                 </button>
             </div>
 
             <?php if ( empty( $issues ) ) : ?>
                 <div class="wpag-empty-state">
                     <span class="dashicons dashicons-yes-alt" style="font-size:48px;width:48px;height:48px;color:#46b450;"></span>
-                    <h2><?php esc_html_e( 'No issues found!', 'wp-accessibility-guard' ); ?></h2>
+                    <h2><?php esc_html_e( 'No issues found!', 'accessibility-guard' ); ?></h2>
                 </div>
             <?php else : ?>
             <table class="widefat wpag-issues-table">
                 <thead>
                     <tr>
-                        <th style="width:80px;"><?php esc_html_e( 'Severity', 'wp-accessibility-guard' ); ?></th>
-                        <th><?php esc_html_e( 'Check', 'wp-accessibility-guard' ); ?></th>
-                        <th><?php esc_html_e( 'WCAG', 'wp-accessibility-guard' ); ?></th>
-                        <th><?php esc_html_e( 'Message', 'wp-accessibility-guard' ); ?></th>
-                        <th><?php esc_html_e( 'Element', 'wp-accessibility-guard' ); ?></th>
+                        <th style="width:80px;"><?php esc_html_e( 'Severity', 'accessibility-guard' ); ?></th>
+                        <th><?php esc_html_e( 'Check', 'accessibility-guard' ); ?></th>
+                        <th><?php esc_html_e( 'WCAG', 'accessibility-guard' ); ?></th>
+                        <th><?php esc_html_e( 'Message', 'accessibility-guard' ); ?></th>
+                        <th><?php esc_html_e( 'Element', 'accessibility-guard' ); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -541,7 +541,7 @@ class WPAG_Admin {
                             <?php if ( mb_strlen( $issue['element'] ) > 80 ) : ?>
                                 <div class="wpag-element-wrap">
                                     <code class="wpag-element-short"><?php echo esc_html( mb_substr( $issue['element'], 0, 80 ) ); ?>…</code>
-                                    <button type="button" class="wpag-toggle-element" title="<?php esc_attr_e( 'Show full element', 'wp-accessibility-guard' ); ?>">
+                                    <button type="button" class="wpag-toggle-element" title="<?php esc_attr_e( 'Show full element', 'accessibility-guard' ); ?>">
                                         <span class="dashicons dashicons-visibility"></span>
                                     </button>
                                     <code class="wpag-element-full"><?php echo esc_html( $issue['element'] ); ?></code>
@@ -567,7 +567,7 @@ class WPAG_Admin {
     public function render_settings_page() {
         ?>
         <div class="wrap wpag-wrap">
-            <h1><?php esc_html_e( 'Accessibility Guard Settings', 'wp-accessibility-guard' ); ?></h1>
+            <h1><?php esc_html_e( 'Accessibility Guard Settings', 'accessibility-guard' ); ?></h1>
             <form method="post" action="options.php">
                 <?php
                 settings_fields( 'wpag_settings_group' );
@@ -586,7 +586,7 @@ class WPAG_Admin {
      * @return array
      */
     public function add_scan_column( $columns ) {
-        $columns['wpag_status'] = __( 'A11y', 'wp-accessibility-guard' );
+        $columns['wpag_status'] = __( 'A11y', 'accessibility-guard' );
         return $columns;
     }
 
@@ -603,7 +603,7 @@ class WPAG_Admin {
 
         $last_scan = get_post_meta( $post_id, '_wpag_last_scan', true );
         if ( ! $last_scan ) {
-            echo '<span class="wpag-dot wpag-dot-gray" title="' . esc_attr__( 'Not scanned', 'wp-accessibility-guard' ) . '">&#9679;</span>';
+            echo '<span class="wpag-dot wpag-dot-gray" title="' . esc_attr__( 'Not scanned', 'accessibility-guard' ) . '">&#9679;</span>';
             return;
         }
 
@@ -613,14 +613,14 @@ class WPAG_Admin {
         if ( $errors > 0 ) {
             $class = 'wpag-dot-red';
             /* translators: %d: number of errors */
-            $title = sprintf( __( '%d errors', 'wp-accessibility-guard' ), $errors );
+            $title = sprintf( __( '%d errors', 'accessibility-guard' ), $errors );
         } elseif ( $issues > 0 ) {
             $class = 'wpag-dot-yellow';
             /* translators: %d: number of warnings/notices */
-            $title = sprintf( __( '%d warnings/notices', 'wp-accessibility-guard' ), $issues );
+            $title = sprintf( __( '%d warnings/notices', 'accessibility-guard' ), $issues );
         } else {
             $class = 'wpag-dot-green';
-            $title = __( 'No issues', 'wp-accessibility-guard' );
+            $title = __( 'No issues', 'accessibility-guard' );
         }
 
         printf(
