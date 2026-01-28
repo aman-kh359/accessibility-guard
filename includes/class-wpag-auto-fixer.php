@@ -76,7 +76,7 @@ class WPAG_Auto_Fixer {
      * Enqueue skip link CSS using wp_add_inline_style.
      */
     public function enqueue_skip_link_css() {
-        wp_register_style( 'wpag-skip-link', false );
+        wp_register_style( 'wpag-skip-link', false, array(), '1.0.0' );
         wp_enqueue_style( 'wpag-skip-link' );
         wp_add_inline_style( 'wpag-skip-link',
             '.wpag-skip-link {

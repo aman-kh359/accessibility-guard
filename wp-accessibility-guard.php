@@ -53,13 +53,6 @@ function wpag_default_settings() {
     );
 }
 
-/**
- * Load plugin text domain for translations.
- */
-function wpag_load_textdomain() {
-    load_plugin_textdomain( 'wp-accessibility-guard', false, dirname( WPAG_PLUGIN_BASENAME ) . '/languages' );
-}
-add_action( 'init', 'wpag_load_textdomain' );
 
 /**
  * Initialize plugin classes.

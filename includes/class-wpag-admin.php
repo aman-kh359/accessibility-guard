@@ -612,9 +612,11 @@ class WPAG_Admin {
 
         if ( $errors > 0 ) {
             $class = 'wpag-dot-red';
+            /* translators: %d: number of errors */
             $title = sprintf( __( '%d errors', 'wp-accessibility-guard' ), $errors );
         } elseif ( $issues > 0 ) {
             $class = 'wpag-dot-yellow';
+            /* translators: %d: number of warnings/notices */
             $title = sprintf( __( '%d warnings/notices', 'wp-accessibility-guard' ), $issues );
         } else {
             $class = 'wpag-dot-green';

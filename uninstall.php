@@ -12,11 +12,11 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 
 // Get settings BEFORE deleting (need statement_page_id).
-$settings = get_option( 'wpag_settings' );
+$wpag_settings = get_option( 'wpag_settings' );
 
 // Delete the statement page if it exists.
-if ( is_array( $settings ) && ! empty( $settings['statement_page_id'] ) ) {
-    wp_delete_post( absint( $settings['statement_page_id'] ), true );
+if ( is_array( $wpag_settings ) && ! empty( $wpag_settings['statement_page_id'] ) ) {
+    wp_delete_post( absint( $wpag_settings['statement_page_id'] ), true );
 }
 
 // Delete options.
